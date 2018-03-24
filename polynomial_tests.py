@@ -180,6 +180,18 @@ class PolynomialTests(unittest.TestCase):
         rhp_4 = Polynomial([5.4, 0, 5.8])
         self.assertTrue(lhp_4 == rhp_4)
 
+        lhp_5 = Polynomial([2])
+        rhp_5 = 2
+        self.assertTrue(lhp_5 == rhp_5)
+
+        lhp_6 = Polynomial([2, 1])
+        rhp_6 = 2
+        self.assertFalse(lhp_6 == rhp_6)
+
+        lhp_7 = Polynomial([2])
+        rhp_7 = 3
+        self.assertFalse(lhp_7 == rhp_7)
+
     def test_operator_non_equality_for_polynomials_is_correct(self):
         lhp_1 = Polynomial([5, 0, 4])
         rhp_1 = Polynomial([5, 0, 4])
@@ -196,6 +208,18 @@ class PolynomialTests(unittest.TestCase):
         lhp_4 = Polynomial([0, 5.4, 0.0, 5.8])
         rhp_4 = Polynomial([5.4, 0, 5.8])
         self.assertFalse(lhp_4 != rhp_4)
+
+        lhp_5 = Polynomial([2])
+        rhp_5 = 3
+        self.assertTrue(lhp_5 != rhp_5)
+
+        lhp_6 = Polynomial([2, 1])
+        rhp_6 = 2
+        self.assertTrue(lhp_6 != rhp_6)
+
+        lhp_7 = Polynomial([2])
+        rhp_7 = 2
+        self.assertFalse(lhp_7 != rhp_7)
 
     def test_converting_polynomial_to_string_is_correct(self):
         p_1 = Polynomial([5, 1, 4])
@@ -238,11 +262,36 @@ class PolynomialTests(unittest.TestCase):
         result_10 = str(p_10)
         self.assertEqual(result_10, '0')
 
+        p_11 = Polynomial([1, 1])
+        result_11 = str(p_11)
+        self.assertEqual(result_11, 'x+1')
+
+        p_12 = Polynomial([1, 2, 2, 1])
+        result_12 = str(p_12)
+        self.assertEqual(result_12, 'x3+2x2+2x+1')
+
     def test_coeffs_is_not_list__is_incorrect(self):
         self.assertRaises(TypeError, Polynomial, 1)
 
     def test_incorrect_type_of_coeffs_is_incorrect(self):
         self.assertRaises(TypeError, Polynomial, ["aaa", "bb"])
+
+    def test_incorrect_type_of_rh_value_in_equal_operation_is_incorrect(self):
+        p_1 = Polynomial([1, 0])
+        self.assertRaises(TypeError, p_1.__eq__, "aaa")
+
+    def test_incorrect_type_of_rh_value_in_non_equal_operation_is_incorrect(self):
+        p_1 = Polynomial([1, 0])
+        self.assertRaises(TypeError, p_1.__ne__, "aaa")
+
+    def test_incorrect_type_of_rh_value_in_add_operation_is_incorrect(self):
+        p_1 = Polynomial([1, 0])
+        self.assertRaises(TypeError, p_1.__add__, "aaa")
+
+    def test_incorrect_type_of_rh_value_in_mul_operation_is_incorrect(self):
+        p_1 = Polynomial([1, 0])
+        self.assertRaises(TypeError, p_1.__mul__, "aaa")
+
 
 if __name__ == '__main__':
     unittest.main()
