@@ -270,7 +270,7 @@ class PolynomialTests(unittest.TestCase):
         result_12 = str(p_12)
         self.assertEqual(result_12, 'x3+2x2+2x+1')
 
-    def test_coeffs_is_not_list__is_incorrect(self):
+    def test_coeffs_is_not_list_is_incorrect(self):
         self.assertRaises(TypeError, Polynomial, 1)
 
     def test_incorrect_type_of_coeffs_is_incorrect(self):

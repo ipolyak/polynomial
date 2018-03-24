@@ -2,6 +2,8 @@ import operator
 
 class Polynomial:
     def __init__(self, coeffsList):
+        if not isinstance(coeffsList, list):
+            raise TypeError("Incorrect type of coeffs. 'list' type is expected.")
         if not coeffsList:
             self.coeffs = [0]
             self.degree = 0
